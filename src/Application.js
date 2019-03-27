@@ -1,11 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from 'connected-react-router'
+import { Route, Switch } from 'react-router-dom';
+import LoginPage from './components/LoginPage/LoginPage';
+import configureStore, { history } from './configureStore';
 
-class Application extends Component {
-    render() {
-        return (
-            <div>Application</div>
-        )
-    }
-}
+const store = configureStore();
 
-export default Application
+const Application = () => (
+    <Provider store={store}>
+        <ConnectedRouter history={history}>
+            <Switch>
+                <Route exact path="" component={LoginPage} />
+            </Switch>
+        </ConnectedRouter>
+    </Provider>
+);
+
+export default Application;
